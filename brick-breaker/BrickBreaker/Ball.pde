@@ -38,9 +38,7 @@ class Ball {
   //determines if the ball has collided with the platform
   void detectCollision(Platform p) {
     Vector pLoc = p.getLocation();
-   
-    if ((this.location.x + radius >= pLoc.x && this.location.x + radius <= pLoc.x + p.getWidth() + 1) &&
-        (this.location.y + radius >= pLoc.y && this.location.y - radius <= pLoc.y + p.getLength() + 1)) {
+    if (overlap(pLoc.x, pLoc.y, p.getWidth(), p.getLength())) {
            velocity.y *= -1;
     }
   }
@@ -48,15 +46,17 @@ class Ball {
   //determine if the ball has collided with a brick
   boolean detectCollision(Brick b) {
     Vector bLoc = b.getLocation();
-   
-    if ((this.location.x + radius >= bLoc.x && this.location.x + radius <= bLoc.x + b.getWidth()) &&
-        (this.location.y + radius >= bLoc.y && this.location.y - radius <= bLoc.y + b.getLength())) {
+    if (overlap(bLoc.x, bLoc.y, b.getWidth(), b.getLength())) {
            velocity.y *= -1;
            b.breakBrick();
            return true;
-    }
-       
+    } 
     return false;
+  }
+  
+  //returns if this circle and a rectangle are overlapped
+  boolean overlap(float x, float y, float w, float l){
+    return ((this.location.x + radius >= x && this.location.x + radius <= x + w) &&(this.location.y + radius >= y && this.location.y - radius <= y + l)); 
   }
  
   //return to the ball to it's starting position - on top of the platform
