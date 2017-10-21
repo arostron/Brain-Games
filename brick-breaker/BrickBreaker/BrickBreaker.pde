@@ -38,7 +38,7 @@ void draw() {
     ball.display();
     ball.move();
     platform.display();
-    platform.move();
+    platform.moveUnder();
     drawLives();
   } else {
       if (--lives == 0) {
@@ -77,7 +77,7 @@ void keyPressed() {
 //initialize all game objects
 void initialize() {
   ball     = new Ball(new Vector(width/2,339), new Vector(2,-2), 10, color(0,0,255));
-  platform = new Platform(new Vector(width/2-30,350), new Vector(3,0), 60, 10, color(128,128,128));
+  platform = new Platform(new Vector(width/2-30,350), new Vector(3,0), 60, 10, color(128,128,128), 50);
   paused   = false;
   gameOver = false;
   lives    = 3;
@@ -149,5 +149,3 @@ void drawLives() {
     ellipse(width-20,(i*20) + rad, rad, rad);   
   } 
 }
-
-
