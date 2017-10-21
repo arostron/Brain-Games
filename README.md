@@ -1,3 +1,3 @@
 This is a repository for the different mindflex extensions made for DiscoverE.
 
--Alex
+Base source code from: https://github.com/jakewilson/brickbreaker
