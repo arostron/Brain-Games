@@ -40,29 +40,35 @@ class Platform {
   //if the threshold value is exceeded, move the platform underneath the ball
   void moveUnder(){ 
     if(100 > threshold){//100 to ensure that this is alwats true for now
-      if(inRange(ball.location.x, this.location.x,this.location.x+this.pWidth)){ //if the ball is within the platform 
-      //do nothing 
-      println("under the ball"); 
-      
-      }else if(this.location.x > ball.location.x){
-        //to the right of the ball
-        println("to the right of the ball"); 
-        moveLeft(); 
-      
-      }else if(this.location.x < ball.location.x){
-        //to the left of the ball
-        println("to the left of the ball"); 
-        moveRight(); 
+    
+      switch (inRange(ball.location.x, this.location.x,this.location.x+this.pWidth)){
+        case 1:
+          println("to the left of the ball"); 
+          moveRight();
+          break;
+        case 0:
+          println("under the ball"); 
+          break;
+        case -1:
+          println("to the right of the ball"); 
+          moveLeft(); 
+          break;
+        default:
+          break; 
+          //shouldnt reach default case 
       }
-    }//end if 
+    
+    }
   }//end move under
   
-  //returns if a value is between two values
-  boolean inRange(float x, float bottomOfRange, float topOfRange){
-    if((x < bottomOfRange) || (x > topOfRange)){//if x is not between two variables 
-      return false; 
+  //returns -1 if x is to the left of the specified rance, 0 if x is inside the range, or 1 if x is to the right of the range
+  int inRange(float x, float bottomOfRange, float topOfRange){
+    if((x < bottomOfRange) ){//if x is not between two variables 
+      return -1; 
+    }else if((x > topOfRange)){
+      return 1; 
     }else{//x is between the range endings
-      return true; 
+      return 0; 
     }
   }
   
