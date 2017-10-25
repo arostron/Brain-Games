@@ -3,8 +3,10 @@ BrickBreaker
 
 Simple Brick Breaker game in Processing.
 
+NOTE: I did not create all of this code. I used code as a baseplate from:  https://github.com/jakewilson/brickbreaker
 
-The levels are unlimited as of right now, but I doubt anyone will have the patience to get past level 5.
+I also implemented serial communications by referencing:
+
 
 ------------------------------
 Commands:
