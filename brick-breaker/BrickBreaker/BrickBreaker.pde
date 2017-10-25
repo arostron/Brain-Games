@@ -91,6 +91,42 @@ void initialize() {
     bricks[i] = new Brick(new Vector(((i % 12) * width/12), ((i/12) * 20)), width/12, 20, color(255,0,0));
 }
 
+
+//function for dealing with information from the serial monitor 
+void serialEvent(Serial p) {
+  // Split incoming packet on commas
+  // See https://github.com/kitschpatrol/Arduino-Brain-Library/blob/master/README for information on the CSV packet format
+  
+  String incomingString = p.readString().trim();
+  print("Received string over serial: ");
+  println(incomingString);  
+  
+  String[] incomingValues = split(incomingString, ',');
+
+  // Verify that the packet looks legit
+  if (incomingValues.length > 1) {
+    packetCount++;
+
+    // Wait till the third packet or so to start recording to avoid initialization garbage.
+    if (packetCount > 3) {
+      
+      for (int i = 0; i < incomingValues.length; i++) {
+        String stringValue = incomingValues[i].trim();
+
+      int newValue = Integer.parseInt(stringValue);
+
+        // Zero the EEG power values if we don't have a signal.
+        // Can be useful to leave them in for development.
+        if ((Integer.parseInt(incomingValues[0]) == 200) && (i > 2)) {
+          newValue = 0;
+        }
+
+        channels[i].addDataPoint(newValue);
+      }
+    }
+  } 
+}
+
 //determine whether the ball has fallen under the platform
 boolean died() {
   Vector bLoc = ball.getLocation();      //ball location
