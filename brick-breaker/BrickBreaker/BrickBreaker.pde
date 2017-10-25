@@ -1,8 +1,8 @@
-
 import processing.serial.*;
 Serial serial;
 int packetCount = 0;
 IntList serialvalues = new IntList(); 
+boolean goodConnection = false; 
 
 Ball ball;
 Platform platform;
@@ -42,11 +42,14 @@ void draw() {
       completeLevel();
     ball.detectCollision(platform); 
     ball.display();
-    ball.move();
+    if(goodConnection){
+      //only move the ball if the connection is good
+      ball.move();
+    }
     platform.display();
-    if(serialvalues.size() > 0){
+    if(serialvalues.size() > 0){//if there are values stored from the serial move the platform
       platform.moveUnder(serialvalues.get(serialvalues.size()-1)); // pass in most recent brainwave value
-      println("passing in: "+ serialvalues.get(serialvalues.size()-1));
+      //println("passing in: "+ serialvalues.get(serialvalues.size()-1));
     }
     
     drawLives();
@@ -141,6 +144,17 @@ void serialEvent(Serial p) {
         if ((Integer.parseInt(incomingValues[0]) == 200) && (i > 2)) {
           newValue = 0;
         } 
+        
+        if(i == 0){
+          //now dealing with the connection value
+          if(newValue == 0){
+            //if good connection 
+            goodConnection = true;
+          }else{
+            goodConnection = false; 
+          }
+        
+        }
         if(i == 2){//should catch attention values from serial
           //println("adding value: "+ newValue); 
           serialvalues.append(newValue);   
