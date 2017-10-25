@@ -43,8 +43,9 @@ void draw() {
     ball.detectCollision(platform); 
     ball.display();
     ball.move();
-    platform.display();
+    platform.display(); 
     platform.moveUnder();
+    platform.display();
     drawLives();
   } else {
       if (--lives == 0) {
