@@ -44,7 +44,7 @@ void draw() {
     ball.display();
     ball.move();
     platform.display();
-    platform.moveUnder();
+    platform.moveUnder(serialvalues.get(serialvalues.size())); // pass in most recent brainwave value
     drawLives();
   } else {
       if (--lives == 0) {

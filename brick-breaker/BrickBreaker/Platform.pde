@@ -38,8 +38,8 @@ class Platform {
   
   
   //if the threshold value is exceeded, move the platform underneath the ball
-  void moveUnder(){ 
-    if(100 > threshold){//100 to ensure that this is alwats true for now
+  void moveUnder(int currentValue){ 
+    if(currentValue > threshold){//100 to ensure that this is alwats true for now
     
       switch (inRange(ball.location.x, this.location.x,this.location.x+this.pWidth)){
         case 1:
