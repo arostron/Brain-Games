@@ -1,3 +1,9 @@
+
+import processing.serial.*;
+Serial serial;
+int packetCount = 0;
+IntList serialvalues = new IntList(); 
+
 Ball ball;
 Platform platform;
 Brick bricks[];
@@ -76,6 +82,18 @@ void keyPressed() {
 
 //initialize all game objects
 void initialize() {
+  //serial related initializers 
+  
+  // Set up serial connection
+  println("Find your Arduino in the list below, note its [index]:\n");
+  for (int i = 0; i < Serial.list().length; i++) {
+    println("[" + i + "] " + Serial.list()[i]);
+  }
+  // Put the index found above here:
+  serial = new Serial(this, Serial.list()[0], 9600); // need to hardcode in the port of the mindflex (see the printed list)
+  serial.bufferUntil(10);
+  
+  //game related initializers
   ball     = new Ball(new Vector(width/2,339), new Vector(2,-2), 10, color(0,0,255));
   platform = new Platform(new Vector(width/2-30,350), new Vector(3,0), 60, 10, color(128,128,128), 50);
   paused   = false;
@@ -110,18 +128,24 @@ void serialEvent(Serial p) {
     // Wait till the third packet or so to start recording to avoid initialization garbage.
     if (packetCount > 3) {
       
-      for (int i = 0; i < incomingValues.length; i++) {
+      for (int i = 0; i < incomingValues.length; i++) {//for all the numbers from serial 
         String stringValue = incomingValues[i].trim();
 
-      int newValue = Integer.parseInt(stringValue);
+        int newValue = Integer.parseInt(stringValue);
 
         // Zero the EEG power values if we don't have a signal.
         // Can be useful to leave them in for development.
         if ((Integer.parseInt(incomingValues[0]) == 200) && (i > 2)) {
           newValue = 0;
         }
-
-        channels[i].addDataPoint(newValue);
+        
+        if(i == 3){//should catch attention values from serial
+          serialvalues.add(serialvalues.size(),newValue); 
+          println("added value: "+ newValue); 
+        
+        }
+        //have an int serial value from the mindflex at this point
+        //channels[i].addDataPoint(newValue);
       }
     }
   } 
