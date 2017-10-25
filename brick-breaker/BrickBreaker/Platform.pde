@@ -43,14 +43,14 @@ class Platform {
     
       switch (inRange(ball.location.x, this.location.x,this.location.x+this.pWidth)){
         case 1:
-          println("to the left of the ball"); 
+          //println("to the left of the ball"); 
           moveRight();
           break;
         case 0:
-          println("under the ball"); 
+          //println("under the ball"); 
           break;
         case -1:
-          println("to the right of the ball"); 
+          //println("to the right of the ball"); 
           moveLeft(); 
           break;
         default:

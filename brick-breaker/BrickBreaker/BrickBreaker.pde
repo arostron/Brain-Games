@@ -44,7 +44,11 @@ void draw() {
     ball.display();
     ball.move();
     platform.display();
-    platform.moveUnder(serialvalues.get(serialvalues.size())); // pass in most recent brainwave value
+    if(serialvalues.size() > 0){
+      platform.moveUnder(serialvalues.get(serialvalues.size()-1)); // pass in most recent brainwave value
+      println("passing in: "+ serialvalues.get(serialvalues.size()-1));
+    }
+    
     drawLives();
   } else {
       if (--lives == 0) {
@@ -90,15 +94,15 @@ void initialize() {
     println("[" + i + "] " + Serial.list()[i]);
   }
   // Put the index found above here:
-  serial = new Serial(this, Serial.list()[0], 9600); // need to hardcode in the port of the mindflex (see the printed list)
+  serial = new Serial(this, Serial.list()[7], 9600); // need to hardcode in the port of the mindflex (see the printed list)
   serial.bufferUntil(10);
   
   //game related initializers
   ball     = new Ball(new Vector(width/2,339), new Vector(2,-2), 10, color(0,0,255));
-  platform = new Platform(new Vector(width/2-30,350), new Vector(3,0), 60, 10, color(128,128,128), 50);
+  platform = new Platform(new Vector(width/2-30,350), new Vector(3,0), 60, 10, color(128,128,128), 50);// set threshold value at last int here 
   paused   = false;
   gameOver = false;
-  lives    = 3;
+  lives    = 5;
   
   if (levelComplete)
     numBricks += 12;
@@ -127,23 +131,22 @@ void serialEvent(Serial p) {
 
     // Wait till the third packet or so to start recording to avoid initialization garbage.
     if (packetCount > 3) {
-      
+      //println("past third packet count");
       for (int i = 0; i < incomingValues.length; i++) {//for all the numbers from serial 
         String stringValue = incomingValues[i].trim();
-
         int newValue = Integer.parseInt(stringValue);
 
         // Zero the EEG power values if we don't have a signal.
         // Can be useful to leave them in for development.
         if ((Integer.parseInt(incomingValues[0]) == 200) && (i > 2)) {
           newValue = 0;
+        } 
+        if(i == 2){//should catch attention values from serial
+          //println("adding value: "+ newValue); 
+          serialvalues.append(newValue);   
+        
         }
         
-        if(i == 3){//should catch attention values from serial
-          serialvalues.add(serialvalues.size(),newValue); 
-          println("added value: "+ newValue); 
-        
-        }
         //have an int serial value from the mindflex at this point
         //channels[i].addDataPoint(newValue);
       }
