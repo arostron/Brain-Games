@@ -68,7 +68,7 @@ class Ball {
     float LENGTH = p.getLength(); 
     
     //determine where the ball is 
-    
+    ballPos = findBall(x,y,WIDTH,LENGTH); 
     
     //run collision checks based on where the ball is with respect to the box
     collide = isCollide(x,y,WIDTH,LENGTH,ballPos); 
@@ -90,7 +90,8 @@ class Ball {
     float LENGTH = b.getLength(); 
     int ballPos = 0; //where the ball is with respect to the rectangle 
    
-    //determine where the ball is 
+    //determine where the ball is wrt rect
+    ballPos = findBall(x,y,WIDTH,LENGTH); 
     
     //run collision checks based on where the ball is with respect to the box
     collide = isCollide(x,y,WIDTH,LENGTH,ballPos); 
@@ -103,6 +104,27 @@ class Ball {
     } 
     return false;
   }
+  
+  //returns the numbered location of this ball with respect to the rectangle inputted 
+  int findBall(float x, float y, float WIDTH, float LENGTH){
+    //x,y,width, length are dim of the rect 
+    int[][] ballpos = {{1,2,3},{8,9,4},{7,6,9}}; 
+    return ballpos[(int)map(inRange(x,x+WIDTH,this.location.x),-1,1,0,2)][(int)map(inRange(y,y+LENGTH,this.location.y),-1,1,0,2)]; 
+  }
+  
+  
+  
+  //returns -1 if x is to the left of the specified rance, 0 if x is inside the range, or 1 if x is to the right of the range
+  int inRange(float x, float bottomOfRange, float topOfRange){
+    if((x < bottomOfRange) ){//if x is not between two variables 
+      return -1; 
+    }else if((x > topOfRange)){
+      return 1; 
+    }else{//x is between the range endings
+      return 0; 
+    }
+  }
+  
   
   boolean isCollide(float x, float y, float WIDTH, float LENGTH, int ballPos){
     // x y width and length are the params of the rectangle the ball could be touching 
