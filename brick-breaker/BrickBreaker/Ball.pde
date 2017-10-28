@@ -60,10 +60,18 @@ class Ball {
   void accdetectCollision(Platform p) {
     Vector pLoc = p.getLocation();
     boolean collide = false; 
+    int ballPos = 0; //where the ball is with respect to the rectangle 
     //use pLoc.x, pLoc.y, p.getWidth(), p.getLength()
+    float x = pLoc.x;
+    float y = pLoc.y; 
+    float WIDTH = p.getWidth(); 
+    float LENGTH = p.getLength(); 
     
     //determine where the ball is 
+    
+    
     //run collision checks based on where the ball is with respect to the box
+    collide = isCollide(x,y,WIDTH,LENGTH,ballPos); 
     
     //collide determined respond accordingly
     if (collide) {
@@ -76,9 +84,16 @@ class Ball {
     Vector bLoc = b.getLocation();
     boolean collide = false; 
     //use bLoc.x, bLoc.y, b.getWidth(), b.getLength()
-    
+    float x = bLoc.x;
+    float y = bLoc.y;
+    float WIDTH = b.getWidth(); 
+    float LENGTH = b.getLength(); 
+    int ballPos = 0; //where the ball is with respect to the rectangle 
+   
     //determine where the ball is 
+    
     //run collision checks based on where the ball is with respect to the box
+    collide = isCollide(x,y,WIDTH,LENGTH,ballPos); 
     
     //collide determined respond accordingly 
     if (collide) {
@@ -87,6 +102,40 @@ class Ball {
            return true;
     } 
     return false;
+  }
+  
+  boolean isCollide(float x, float y, float WIDTH, float LENGTH, int ballPos){
+    boolean collide = false; 
+    switch (ballPos){
+    case 1:
+    //ball is top left of rect
+    break;
+    case 2:
+    //ball is above mid of rect
+    break;
+    case 3:
+    //ball is top right of rect
+    break;
+    case 4:
+    //ball is right of rect
+    break;
+    case 5:
+    //ball is bottom right of rect
+    break;
+    case 6:
+    //ball is under rect
+    break;
+    case 7:
+    //ball is bottom left of rect
+    break;
+    case 8:
+    //ball is left of rect
+    break;
+    default:
+    //do nothing error case
+    break;
+    }
+  return collide; 
   }
   
   //returns: if a circle in 2d space is touching/overlapping a  line 
