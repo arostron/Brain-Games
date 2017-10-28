@@ -14,6 +14,8 @@ boolean paused,
         gameOver,
         levelComplete;
         
+boolean playwithlives = false; //change me to play with lives or not
+        
 int     level,
         numBricks,
         lives;
@@ -55,7 +57,9 @@ void draw() {
     drawLives();
   } else {
       if (--lives == 0) {
-        gameOver();
+        if(playwithlives){
+          gameOver();
+        }
       } else {
         ball.returnToOrigin();
         platform.returnToOrigin();
