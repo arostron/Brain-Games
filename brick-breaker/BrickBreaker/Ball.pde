@@ -105,31 +105,40 @@ class Ball {
   }
   
   boolean isCollide(float x, float y, float WIDTH, float LENGTH, int ballPos){
+    // x y width and length are the params of the rectangle the ball could be touching 
     boolean collide = false; 
     switch (ballPos){
     case 1:
     //ball is top left of rect
+    collide = circTouchVertex(x,y,this.location.x,this.location.y,this.radius); 
     break;
     case 2:
     //ball is above mid of rect
+    collide = circTouchVertical(y,this.location.y,this.radius);
     break;
     case 3:
     //ball is top right of rect
+    collide = circTouchVertex(x,y,this.location.x,this.location.y,this.radius); 
     break;
     case 4:
     //ball is right of rect
+    collide = circTouchVertical(x+LENGTH,this.location.x,this.radius);
     break;
     case 5:
     //ball is bottom right of rect
+    collide = circTouchVertex(x,y,this.location.x,this.location.y,this.radius); 
     break;
     case 6:
     //ball is under rect
+    collide = circTouchVertical(y-WIDTH,this.location.y,this.radius);
     break;
     case 7:
     //ball is bottom left of rect
+    collide = circTouchVertex(x,y,this.location.x,this.location.y,this.radius); 
     break;
     case 8:
     //ball is left of rect
+    collide = circTouchVertical(x,this.location.x,this.radius);
     break;
     default:
     //do nothing error case
@@ -139,7 +148,7 @@ class Ball {
   }
   
   //returns: if a circle in 2d space is touching/overlapping a  line 
-  boolean circTouchVert(float line, float circMid, float circR){
+  boolean circTouchVertical(float line, float circMid, float circR){
     return (abs(line-circMid) <= circR);
   } 
   
