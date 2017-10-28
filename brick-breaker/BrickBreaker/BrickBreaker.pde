@@ -42,6 +42,7 @@ void draw() {
       completeLevel();
     ball.detectCollision(platform); 
     ball.display();
+<<<<<<< HEAD
     if(goodConnection){
       //only move the ball if the connection is good
       ball.move();
@@ -52,6 +53,12 @@ void draw() {
       //println("passing in: "+ serialvalues.get(serialvalues.size()-1));
     }
     
+=======
+    ball.move();
+    platform.display(); 
+    platform.moveUnder();
+    platform.display();
+>>>>>>> improved-platform
     drawLives();
   } else {
       if (--lives == 0) {
