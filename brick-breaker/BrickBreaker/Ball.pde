@@ -159,7 +159,7 @@ class Ball {
     break;
     case 6:
     //ball is under rect
-    collide = circTouchVertical(y-LENGTH,this.location.y,this.radius);
+    collide = circTouchVertical(y+LENGTH,this.location.y,this.radius);
     break;
     case 7:
     //ball is bottom left of rect
