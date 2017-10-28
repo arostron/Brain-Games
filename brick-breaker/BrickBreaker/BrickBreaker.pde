@@ -36,13 +36,13 @@ void draw() {
   if (!died()) {
     for (int i = 0; i < bricks.length; i++) {
       bricks[i].display();
-      ball.detectCollision(bricks[i]);
+      ball.accdetectCollision(bricks[i]);
       if (bricks[i].broken)
         bricksBroken++;
     }
     if (bricksBroken == bricks.length)
       completeLevel();
-    ball.detectCollision(platform); 
+    ball.accdetectCollision(platform); 
     ball.display();
     if(goodConnection){
       //only move the ball if the connection is good

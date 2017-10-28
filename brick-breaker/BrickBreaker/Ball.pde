@@ -69,9 +69,12 @@ class Ball {
     
     //determine where the ball is 
     ballPos = findBall(x,y,WIDTH,LENGTH); 
-    
+        
+    //println("current ball position:"+ballPos);
     //run collision checks based on where the ball is with respect to the box
     collide = isCollide(x,y,WIDTH,LENGTH,ballPos); 
+     
+    //println(collide);
     
     //collide determined respond accordingly
     if (collide) {
@@ -92,10 +95,10 @@ class Ball {
    
     //determine where the ball is wrt rect
     ballPos = findBall(x,y,WIDTH,LENGTH); 
-    
+
     //run collision checks based on where the ball is with respect to the box
-    collide = isCollide(x,y,WIDTH,LENGTH,ballPos); 
-    
+    collide = isCollide(x,y,WIDTH,LENGTH,ballPos);
+
     //collide determined respond accordingly 
     if (collide) {
            velocity.y *= -1;
@@ -108,8 +111,11 @@ class Ball {
   //returns the numbered location of this ball with respect to the rectangle inputted 
   int findBall(float x, float y, float WIDTH, float LENGTH){
     //x,y,width, length are dim of the rect 
-    int[][] ballpos = {{1,2,3},{8,9,4},{7,6,9}}; 
-    return ballpos[(int)map(inRange(x,x+WIDTH,this.location.x),-1,1,0,2)][(int)map(inRange(y,y+LENGTH,this.location.y),-1,1,0,2)]; 
+    int[][] ballpos =  {{1,8,7},{2,9,6},{3,4,5}};
+    int i = (int)map(inRange(this.location.x,x,x+WIDTH),-1,1,0,2);
+    int j = (int)map(inRange(this.location.y,y,y+LENGTH),-1,1,0,2); 
+   
+    return ballpos[i][j]; 
   }
   
   
@@ -129,6 +135,7 @@ class Ball {
   boolean isCollide(float x, float y, float WIDTH, float LENGTH, int ballPos){
     // x y width and length are the params of the rectangle the ball could be touching 
     boolean collide = false; 
+    //println("ball at"+ballPos); 
     switch (ballPos){
     case 1:
     //ball is top left of rect
@@ -144,7 +151,7 @@ class Ball {
     break;
     case 4:
     //ball is right of rect
-    collide = circTouchVertical(x+LENGTH,this.location.x,this.radius);
+    collide = circTouchVertical(x+WIDTH,this.location.x,this.radius);
     break;
     case 5:
     //ball is bottom right of rect
@@ -152,7 +159,7 @@ class Ball {
     break;
     case 6:
     //ball is under rect
-    collide = circTouchVertical(y-WIDTH,this.location.y,this.radius);
+    collide = circTouchVertical(y-LENGTH,this.location.y,this.radius);
     break;
     case 7:
     //ball is bottom left of rect
