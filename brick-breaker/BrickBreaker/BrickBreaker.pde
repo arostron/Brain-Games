@@ -96,6 +96,7 @@ void initialize() {
   //serial related initializers 
   
   // Set up serial connection
+  if(!levelComplete){ // only set up serial at the very start not between levels
   println("Find your Arduino in the list below, note its [index]:\n");
   for (int i = 0; i < Serial.list().length; i++) {
     println("[" + i + "] " + Serial.list()[i]);
@@ -103,6 +104,7 @@ void initialize() {
   // Put the index found above here:
   serial = new Serial(this, Serial.list()[7], 9600); // need to hardcode in the port of the mindflex (see the printed list)
   serial.bufferUntil(10);
+  }
   
   //game related initializers
   ball     = new Ball(new Vector(width/2,339), new Vector(2,-2), 10, color(0,0,255));
