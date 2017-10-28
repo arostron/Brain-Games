@@ -54,6 +54,60 @@ class Ball {
     return false;
   }
   
+  
+// ----------------------improved collison detections funcitons -----------------------
+  //accuratly determines if the ball has collided with the platform
+  void accdetectCollision(Platform p) {
+    Vector pLoc = p.getLocation();
+    boolean collide = false; 
+    //use pLoc.x, pLoc.y, p.getWidth(), p.getLength()
+    
+    //determine where the ball is 
+    //run collision checks based on where the ball is with respect to the box
+    
+    //collide determined respond accordingly
+    if (collide) {
+           velocity.y *= -1;
+    }
+  }
+ 
+  //accuratly determine if the ball has collided with a brick
+  boolean accdetectCollision(Brick b) {
+    Vector bLoc = b.getLocation();
+    boolean collide = false; 
+    //use bLoc.x, bLoc.y, b.getWidth(), b.getLength()
+    
+    //determine where the ball is 
+    //run collision checks based on where the ball is with respect to the box
+    
+    //collide determined respond accordingly 
+    if (collide) {
+           velocity.y *= -1;
+           b.breakBrick();
+           return true;
+    } 
+    return false;
+  }
+  
+  //returns: if a circle in 2d space is touching/overlapping a vertical line 
+  boolean circTouchVert(){
+    return false;
+  }
+  
+  //returns: if a circle in 2d space is touching/overlapping a horizontal line 
+  boolean circTouchHoriz(){
+    return false;
+  }
+  
+  //returns: if a cirvle in 2d space is touching/overlapping a point 
+  boolean circTouchVertex(){
+    return false;
+  }
+  
+  // ---------------------- end improved collison detections funcitons -----------------------
+  
+  
+  
   //returns if this circle and a rectangle are overlapped
   boolean overlap(float x, float y, float w, float l){
     return ((this.location.x + radius >= x && this.location.x + radius <= x + w) &&(this.location.y + radius >= y && this.location.y - radius <= y + l)); 
