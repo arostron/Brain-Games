@@ -89,19 +89,16 @@ class Ball {
     return false;
   }
   
-  //returns: if a circle in 2d space is touching/overlapping a vertical line 
-  boolean circTouchVert(){
-    return false;
-  }
-  
-  //returns: if a circle in 2d space is touching/overlapping a horizontal line 
-  boolean circTouchHoriz(){
-    return false;
-  }
+  //returns: if a circle in 2d space is touching/overlapping a  line 
+  boolean circTouchVert(float line, float circMid, float circR){
+    return (abs(line-circMid) <= circR);
+  } 
   
   //returns: if a cirvle in 2d space is touching/overlapping a point 
-  boolean circTouchVertex(){
-    return false;
+  boolean circTouchVertex(float vertexX, float vertexY, float circX, float circY, float r){
+    //uses pythagorean ther. (a^2 + b^2 = c^2) 
+    // a^2 + b^2  (distance between points) <= r^2 (radius)
+    return (((vertexX-circX)*(vertexX-circX)+(vertexY-circY)*(vertexY-circY))<= r*r);
   }
   
   // ---------------------- end improved collison detections funcitons -----------------------
