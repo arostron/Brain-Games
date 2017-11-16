@@ -124,6 +124,7 @@ void initialize() {
 
 
 //function for dealing with information from the serial monitor 
+//This function allows the mindflex to interact with the rest of the program
 void serialEvent(Serial p) {
   // Split incoming packet on commas
   // See https://github.com/kitschpatrol/Arduino-Brain-Library/blob/master/README for information on the CSV packet format
@@ -161,7 +162,7 @@ void serialEvent(Serial p) {
           }
         
         }
-        if(i == 2){//should catch attention values from serial
+        if(i == 2){//should read attention values from serial into the serialvalues list
           //println("adding value: "+ newValue); 
           serialvalues.append(newValue);   
         
