@@ -24,6 +24,7 @@ Commands:
 
 [enter] restart game after game over
 
-[right arrow] move right
+[Increasing concentration] move the platform under the ball
 
-[left  arrow] move left
+[right arrow] move right (old)
+[left  arrow] move left (old)
