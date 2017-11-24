@@ -1,7 +1,7 @@
 BrickBreaker
 ============
 
-Brick Breaker game in Processing where the platform is controlled by a mindflex.
+Brick Breaker game in Processing where the platform is controlled by brainwaves from a mindflex.
 
 
 Instructions
@@ -25,6 +25,3 @@ Commands:
 [enter] restart game after game over
 
 [Increasing concentration] move the platform under the ball
-
-[right arrow] move right (old)
-[left  arrow] move left (old)

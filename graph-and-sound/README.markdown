@@ -1,5 +1,8 @@
 ## Processing Brain Grapher
 
+#### Acknowledgements
+The files in this directory, including this README, were copied from https://github.com/kitschpatrol/BrainGrapher. I modifed a few things here and there to implement some sound functions.. 
+
 #### Overview
 
 <img width="500" src="screenshot.jpg" />
