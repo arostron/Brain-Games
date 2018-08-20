@@ -1,3 +1,6 @@
+int difficulty = 40 //40 is an easy value, 80 is VERY hard
+
+
 import processing.serial.*;
 Serial serial;
 int packetCount = 0;
@@ -108,7 +111,7 @@ void initialize() {
   
   //game related initializers
   ball     = new Ball(new Vector(width/2,339), new Vector(2,-2), 10, color(0,0,255));
-  platform = new Platform(new Vector(width/2-30,350), new Vector(3,0), 60, 10, color(128,128,128), 40);// set threshold value at last int here 
+  platform = new Platform(new Vector(width/2-30,350), new Vector(3,0), 60, 10, color(128,128,128), difficulty);// set threshold value at last int here 
   paused   = false;
   gameOver = false;
   lives    = 5;
